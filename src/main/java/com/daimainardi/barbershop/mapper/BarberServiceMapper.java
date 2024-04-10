@@ -19,8 +19,7 @@ public class BarberServiceMapper {
 
     public static List<BarberServiceResponseDTO> mapServiceResponseList(List<BarberServiceEntity> barberServiceEntityList) {
         return barberServiceEntityList.stream()
-                .map(barberServiceEntity -> new BarberServiceResponseDTO(barberServiceEntity.getId(),
-                        barberServiceEntity.getDescription(), barberServiceEntity.getPrice()))
+                .map(barberServiceEntity -> new BarberServiceResponseDTO(barberServiceEntity.getDescription(), barberServiceEntity.getPrice()))
                 .toList();
     }
 }
