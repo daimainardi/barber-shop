@@ -36,11 +36,11 @@ public class StubBuilder {
         return List.of(new BarberServiceRequestDTO("Barba", 20.00));
     }
     public static List<BarberServiceResponseDTO> barberServiceResponseDTOList(){
-        return List.of(new BarberServiceResponseDTO("555", "Barba", 20.00));
+        return List.of(new BarberServiceResponseDTO("Barba", 20.00));
     }
 
     public static List<BarberServiceEntity> barberServiceEntityList() {
-        return List.of(new BarberServiceEntity("555", "Barba", 20.00));
+        return List.of(new BarberServiceEntity("Barba", 20.00));
     }
 
     public static BarberRequestDTO barberRequestDTO() {
@@ -55,14 +55,23 @@ public class StubBuilder {
     }
 
     public static BarberEntity barberEntity() {
-        return new BarberEntity("123", "joão", "51999997563", "joao@gmail.com", "00762345098", StubBuilder.addressEntity(),
-                StubBuilder.shiftList(), StubBuilder.barberServiceEntityList(), 10);
+        return new BarberEntity("123", "joão", "51999997563", "joao@gmail.com", "00762345098",
+                StubBuilder.addressEntity(), StubBuilder.shiftList(), StubBuilder.barberServiceEntityList(), 10);
     }
 
     public static BarberEntity barberEntityUpdated(){
         return new BarberEntity(barberEntity().getId(), updateDataBarberDTO().name(), updateDataBarberDTO().phone(),
                 updateDataBarberDTO().email(), barberEntity().getCpf(),StubBuilder.addressEntity(), barberEntity().getShift(),
                 StubBuilder.barberServiceEntityList(), updateDataBarberDTO().discount());
+    }
+
+    public static UpdateDataBarberDTO updateName(){
+        return new UpdateDataBarberDTO("Tiago", null, null, null, null, null);
+    }
+    public static BarberEntity barberEntityUpdateName(){
+        return new BarberEntity(barberEntity().getId(), updateName().name(), barberEntity().getPhone(),barberEntity().getEmail(),
+                barberEntity().getCpf(), StubBuilder.addressEntity(), barberEntity().getShift(),
+                StubBuilder.barberServiceEntityList(),barberEntity().getDiscount());
     }
 
 

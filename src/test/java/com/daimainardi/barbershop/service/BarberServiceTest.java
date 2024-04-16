@@ -85,26 +85,23 @@ public class BarberServiceTest {
                 .willReturn(Optional.of(StubBuilder.barberEntity()));
         BDDMockito.given(barberRepository.save(StubBuilder.barberEntityUpdated())).willReturn(StubBuilder.barberEntityUpdated());
         var response = barberService.update(StubBuilder.barberEntity().getId(), StubBuilder.updateDataBarberDTO());
-
-        Assertions.assertDoesNotThrow(() -> barberService.update(StubBuilder.barberEntity().getId(), StubBuilder.updateDataBarberDTO()));
-        //Mockito.verify(barberRepository).save(StubBuilder.barberEntityUpdated());
+        Mockito.verify(barberRepository).save(StubBuilder.barberEntityUpdated());
         Assertions.assertEquals("Tiago", response.name());
         Assertions.assertEquals(15, response.discount());
     }
 
 
-//    @Test
-//    @DisplayName("Deve atualizar somente o campo nome nos dados do barbeiro, id encontrado")
-//    void shouldUpdateDataName() {
-//        UpdateDataBarberDTO updateDataBarberDTO = new UpdateDataBarberDTO("Tiago", null, null,
-//                null, null, null);
-//        BDDMockito.given(barberRepository.findById(StubBuilder.barberEntity().getId()))
-//                .willReturn(Optional.of(StubBuilder.barberEntity()));
-//        BDDMockito.given(barberRepository.save(StubBuilder.barberEntity())).willReturn(StubBuilder.barberEntity());
-//        Assertions.assertDoesNotThrow(() -> barberService.update(StubBuilder.barberEntity().getId(), updateDataBarberDTO));
-//        Assertions.assertEquals("Tiago", StubBuilder.barberEntity().getName());
-//        Assertions.assertEquals("51999997563", StubBuilder.barberEntity().getPhone());
-//    }
+    @Test
+    @DisplayName("Deve atualizar somente o campo nome nos dados do barbeiro, id encontrado")
+    void shouldUpdateDataName() {
+        BDDMockito.given(barberRepository.findById(StubBuilder.barberEntity().getId()))
+                .willReturn(Optional.of(StubBuilder.barberEntity()));
+        BDDMockito.given(barberRepository.save(StubBuilder.barberEntityUpdateName())).willReturn(StubBuilder.barberEntityUpdateName());
+        var response = barberService.update(StubBuilder.barberEntity().getId(), StubBuilder.updateName());
+        Mockito.verify(barberRepository).save(StubBuilder.barberEntityUpdateName());
+        Assertions.assertEquals("Tiago", response.name());
+        Assertions.assertEquals("51999997563", response.phone());
+    }
 
     @Test
     @DisplayName("Não deve atualizar os dados do barbeiro, id não encontrado, BarberNotFoundException")
@@ -113,6 +110,15 @@ public class BarberServiceTest {
                 .willThrow(BarberNotFoundException.class);
         Assertions.assertThrows(BarberNotFoundException.class,
                 () -> barberService.update(StubBuilder.barberEntity().getId(), StubBuilder.updateDataBarberDTO()));
+    }
+
+    @Test
+    @DisplayName("Deve atualizar os dados do barbeiro, id encontrado")
+    void shouldUpdatedData() {
+        BDDMockito.given(barberRepository.findById(StubBuilder.barberEntity().getId()))
+                .willReturn(Optional.of(StubBuilder.barberEntity()));
+        BDDMockito.given(barberRepository.save(StubBuilder.barberEntityUpdated())).willReturn(StubBuilder.barberEntityUpdated());
+        Assertions.assertDoesNotThrow(() -> barberService.update(StubBuilder.barberEntity().getId(), StubBuilder.updateDataBarberDTO()));
     }
 
     @Test
