@@ -10,6 +10,7 @@ import com.daimainardi.barbershop.request.UpdateDataBarberDTO;
 import com.daimainardi.barbershop.response.BarberDTO;
 import com.daimainardi.barbershop.response.BarberResponseDTO;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class BarberService {
 
     private final BarberRepository barberRepository;
@@ -37,15 +39,19 @@ public class BarberService {
     }
 
     public BarberResponseDTO update(String id, UpdateDataBarberDTO updateDataBarberDTO) {
+        log.info("trying to update barber id {} with data {}",id,updateDataBarberDTO);
         BarberEntity barberEntity = barberRepository.findById(id).orElseThrow(() ->
                 new BarberNotFoundException("barber not found", HttpStatus.NOT_FOUND));
+        log.info("barber entity found {}", barberEntity);
         var updatedData = updateData(barberEntity, updateDataBarberDTO);
-        return BarberMapper.mapEntityToResponse(barberRepository.save(updatedData));
+        var barberResponseDTO = BarberMapper.mapEntityToResponse(barberRepository.save(updatedData));
+        log.info("Barber updated successfully {}", barberResponseDTO);
+        return barberResponseDTO;
     }
 
     private BarberEntity updateData(BarberEntity barberEntity, UpdateDataBarberDTO updateDataBarberDTO) {
-        if (updateDataBarberDTO.name() != null){
-             barberEntity.setName(updateDataBarberDTO.name());
+        if (updateDataBarberDTO.name() != null) {
+            barberEntity.setName(updateDataBarberDTO.name());
         }
         if (updateDataBarberDTO.phone() != null) {
             barberEntity.setPhone(updateDataBarberDTO.phone());

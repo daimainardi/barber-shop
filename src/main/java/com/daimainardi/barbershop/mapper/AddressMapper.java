@@ -3,11 +3,12 @@ package com.daimainardi.barbershop.mapper;
 import com.daimainardi.barbershop.request.AddressRequestDTO;
 import com.daimainardi.barbershop.entity.AddressEntity;
 import com.daimainardi.barbershop.response.AddressResponseDTO;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 class AddressMapper {
     public static AddressEntity mapAddressToEntity(AddressRequestDTO address) {
-        //return new AddressEntity(address.street(), address.number(), address.complement(), address.neighborhood(),
-        //address.zipCode(), address.city(), address.state());
         return AddressEntity.builder()
                 .street(address.street())
                 .number(address.number())

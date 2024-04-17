@@ -4,6 +4,8 @@ import com.daimainardi.barbershop.entity.BarberEntity;
 import com.daimainardi.barbershop.request.BarberRequestDTO;
 import com.daimainardi.barbershop.response.BarberDTO;
 import com.daimainardi.barbershop.response.BarberResponseDTO;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -11,7 +13,7 @@ import static com.daimainardi.barbershop.mapper.AddressMapper.mapAddressToEntity
 import static com.daimainardi.barbershop.mapper.AddressMapper.mapAddressToResponse;
 import static com.daimainardi.barbershop.mapper.BarberServiceMapper.mapServiceList;
 import static com.daimainardi.barbershop.mapper.BarberServiceMapper.mapServiceResponseList;
-
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class BarberMapper {
     public static BarberEntity mapRequestToEntity(BarberRequestDTO barberRequestDTO) {
         return BarberEntity.builder()

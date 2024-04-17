@@ -58,15 +58,4 @@ public class BarberShopExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .build();
     }
-
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    @ExceptionHandler(DataIntegrityViolationException.class)
-//    public ErrorModel handleDataIntegrityViolationException(DataIntegrityViolationException e) {
-//        return ErrorModel.builder()
-//                .message(e.getMessage())
-//                .error(e.getClass().getName())
-//                .status(HttpStatus.BAD_REQUEST)
-//                .build();
-//    }
-
 }

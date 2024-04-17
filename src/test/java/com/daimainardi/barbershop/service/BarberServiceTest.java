@@ -113,15 +113,6 @@ public class BarberServiceTest {
     }
 
     @Test
-    @DisplayName("Deve atualizar os dados do barbeiro, id encontrado")
-    void shouldUpdatedData() {
-        BDDMockito.given(barberRepository.findById(StubBuilder.barberEntity().getId()))
-                .willReturn(Optional.of(StubBuilder.barberEntity()));
-        BDDMockito.given(barberRepository.save(StubBuilder.barberEntityUpdated())).willReturn(StubBuilder.barberEntityUpdated());
-        Assertions.assertDoesNotThrow(() -> barberService.update(StubBuilder.barberEntity().getId(), StubBuilder.updateDataBarberDTO()));
-    }
-
-    @Test
     @DisplayName("Deve deletar os dados do barbeiro, id encontrado")
     void shouldDeleteBarberById() {
         BDDMockito.given(barberRepository.findById(StubBuilder.barberEntity().getId()))

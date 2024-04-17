@@ -3,10 +3,12 @@ package com.daimainardi.barbershop.mapper;
 import com.daimainardi.barbershop.entity.CustomerEntity;
 import com.daimainardi.barbershop.request.CustomerRequestDTO;
 import com.daimainardi.barbershop.response.CustomerResponseDTO;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import static com.daimainardi.barbershop.mapper.AddressMapper.mapAddressToEntity;
 import static com.daimainardi.barbershop.mapper.AddressMapper.mapAddressToResponse;
-
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CustomerMapper {
     public static CustomerEntity mapToEntity (CustomerRequestDTO customerRequestDTO){
         return CustomerEntity.builder()
