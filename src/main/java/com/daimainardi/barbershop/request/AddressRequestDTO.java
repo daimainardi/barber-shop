@@ -2,6 +2,7 @@ package com.daimainardi.barbershop.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 public record AddressRequestDTO(
         @NotBlank
@@ -12,7 +13,7 @@ public record AddressRequestDTO(
         @NotBlank
         String neighborhood,
         @NotBlank
-        @Pattern(regexp = "\\d{5}-\\d{3}")
+        @Size(min = 8, max = 8)
         String zipCode,
         @NotBlank
         String city,
